@@ -1,19 +1,21 @@
 import Surreal from 'surrealdb.js';
 
-const db_t = async () => {
-    console.log('Reached')
-    const db = new Surreal('http://127.0.0.1:8000/rpc');
-    await db.signin({
-        user: 'root',
-        pass: 'root'
-    });
 
-    await db.use('test', 'test');
-
-    await db.delete('person');
-}
 
 const TestDB = () => {
+    const db = new Surreal('http://127.0.0.1:8000/rpc');
+
+    const db_t = async () => {
+        await db.signin({
+            user: 'root',
+            pass: 'root'
+        });
+    
+        await db.use('test', 'test');
+        console.log('Reached')
+    
+        console.log(await db.delete('person'));
+    }
 
     return (
         <div>
